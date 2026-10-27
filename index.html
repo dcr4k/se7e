@@ -1,0 +1,2280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SE7E AirCinema | Captação Aérea com Drone & FPV</title>
+  <meta name="description" content="Produção audiovisual de alto impacto com Drone FPV dinâmico, cinematografia aérea em 4K/60fps e pós-produção completa para elevar sua marca." />
+  <meta name="theme-color" content="#0A0A10" />
+
+  <!-- Google Fonts: Montserrat & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- AOS (Animate On Scroll) CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+  <!-- Swiper.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- Lucide Icons (via CDN) -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+
+  <style>
+    /* ==========================================================================
+       1. DESIGN TOKENS & RESET
+       ========================================================================== */
+    :root {
+      --bg-deep: #0A0A10;
+      --bg-surface: #13111C;
+      --bg-glass: rgba(19, 17, 28, 0.65);
+      --bg-glass-hover: rgba(29, 25, 44, 0.82);
+
+      --accent-purple: #8B5CF6;
+      --accent-cyan: #06B6D4;
+      --accent-magenta: #EC4899;
+
+      --grad-primary: linear-gradient(135deg, #8B5CF6 0%, #EC4899 50%, #06B6D4 100%);
+      --grad-cta: linear-gradient(90deg, #8B5CF6 0%, #EC4899 55%, #06B6D4 100%);
+      --grad-border: linear-gradient(135deg, rgba(139, 92, 246, 0.55), rgba(6, 182, 212, 0.35), rgba(236, 72, 153, 0.45));
+
+      --text-primary: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(139, 92, 246, 0.45);
+
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+
+      --shadow-glow: 0 0 30px rgba(139, 92, 246, 0.35), 0 0 60px rgba(6, 182, 212, 0.15);
+      --shadow-card: 0 20px 45px -15px rgba(0, 0, 0, 0.7);
+      --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      color-scheme: dark;
+      --scrollbar-thumb: #8B5CF6;
+      --scrollbar-track: #0A0A10;
+      scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+      scrollbar-width: thin;
+    }
+
+    body {
+      background-color: var(--bg-deep);
+      background-image:
+        radial-gradient(circle at 12% 18%, rgba(139, 92, 246, 0.12) 0%, transparent 38%),
+        radial-gradient(circle at 88% 42%, rgba(6, 182, 212, 0.10) 0%, transparent 40%),
+        radial-gradient(circle at 50% 85%, rgba(236, 72, 153, 0.09) 0%, transparent 45%);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, .font-display {
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      text-wrap: balance;
+    }
+
+    p, li {
+      text-wrap: pretty;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img, video {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Custom Scrollbar (Fallback WebKit para navegadores sem suporte a scrollbar-color) */
+    @supports not (scrollbar-color: auto) {
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--scrollbar-track);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--scrollbar-thumb);
+        border-radius: 5px;
+        border: 2px solid var(--bg-deep);
+      }
+    }
+
+    /* ==========================================================================
+       2. REUSABLE UTILITIES & GLASSMORPHISM
+       ========================================================================== */
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-padding {
+      padding: 6.5rem 0;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 4rem;
+    }
+
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-full);
+      background: rgba(139, 92, 246, 0.12);
+      border: 1px solid rgba(139, 92, 246, 0.35);
+      color: #C4B5FD;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 1.1rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+    }
+
+    .text-gradient {
+      background: var(--grad-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+
+    /* Glassmorphism Panel with Gradient Border */
+    .glass-card {
+      position: relative;
+      background: var(--bg-glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-card);
+      transition: var(--transition-smooth);
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: var(--grad-border);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0.35;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-7px);
+      background: var(--bg-glass-hover);
+      box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.85), 0 0 28px rgba(139, 92, 246, 0.22);
+    }
+
+    .glass-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      padding: 0.95rem 1.85rem;
+      border-radius: var(--radius-full);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      border: none;
+      position: relative;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--grad-cta);
+      background-size: 200% auto;
+      color: #ffffff;
+      box-shadow: 0 0 25px rgba(139, 92, 246, 0.55), 0 0 45px rgba(236, 72, 153, 0.25);
+      animation: pulseGlow 3s infinite ease-in-out;
+    }
+
+    .btn-primary:hover {
+      background-position: right center;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 0 35px rgba(6, 182, 212, 0.7), 0 0 60px rgba(139, 92, 246, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(12px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+      transform: translateY(-3px);
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 22px rgba(139, 92, 246, 0.5), 0 0 40px rgba(236, 72, 153, 0.2);
+      }
+      50% {
+        box-shadow: 0 0 32px rgba(6, 182, 212, 0.65), 0 0 58px rgba(139, 92, 246, 0.45);
+      }
+    }
+
+    /* ==========================================================================
+       3. NAVBAR
+       ========================================================================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1.15rem 0;
+      transition: var(--transition-smooth);
+    }
+
+    .navbar.scrolled {
+      background: rgba(10, 10, 16, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.85rem 0;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.35rem;
+      letter-spacing: 0.04em;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--grad-primary);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      box-shadow: 0 0 18px rgba(139, 92, 246, 0.5);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.25s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0%;
+      height: 2px;
+      background: var(--grad-primary);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 0.65rem 1.35rem;
+      font-size: 0.85rem;
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       4. HERO SECTION
+       ========================================================================== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8rem 0 5rem;
+      overflow: hidden;
+    }
+
+    .hero-video-wrapper {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .hero-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.04);
+      filter: saturate(1.15) contrast(1.05);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(19, 17, 28, 0.45) 0%, rgba(10, 10, 16, 0.88) 75%),
+        linear-gradient(180deg, rgba(10, 10, 16, 0.65) 0%, rgba(10, 10, 16, 0.45) 45%, #0A0A10 100%);
+      z-index: 1;
+    }
+
+    .hero-grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.45rem 1.15rem;
+      border-radius: var(--radius-full);
+      background: rgba(19, 17, 28, 0.72);
+      border: 1px solid rgba(6, 182, 212, 0.4);
+      color: #E2E8F0;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.6rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 24px rgba(6, 182, 212, 0.2);
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 10px var(--accent-cyan);
+      animation: blinkDot 1.6s infinite;
+    }
+
+    @keyframes blinkDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.8); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 6vw, 4.65rem);
+      font-weight: 900;
+      line-height: 1.07;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      color: #CBD5E1;
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.1rem;
+      flex-wrap: wrap;
+      margin-bottom: 3.5rem;
+    }
+
+    .hero-hud {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 1.25rem 1.5rem;
+      border-radius: var(--radius-md);
+      background: rgba(19, 17, 28, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    .hud-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0 0.5rem;
+    }
+
+    .hud-item:last-child {
+      border-right: none;
+    }
+
+    .hud-value {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: var(--text-primary);
+    }
+
+    .hud-label {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ==========================================================================
+       5. DESTAQUES & SERVIÇOS (3 CARDS GRID)
+       ========================================================================== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.75rem;
+    }
+
+    .service-card {
+      padding: 2.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .service-media {
+      position: relative;
+      height: 195px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      margin-bottom: 1.65rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .service-media video,
+    .service-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .service-card:hover .service-media video,
+    .service-card:hover .service-media img {
+      transform: scale(1.08);
+    }
+
+    .service-tag {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      padding: 0.28rem 0.75rem;
+      border-radius: var(--radius-full);
+      background: rgba(10, 10, 16, 0.75);
+      backdrop-filter: blur(8px);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      border: 1px solid rgba(6, 182, 212, 0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .service-icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.22), rgba(6, 182, 212, 0.15));
+      border: 1px solid rgba(139, 92, 246, 0.4);
+      color: #C4B5FD;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.25);
+    }
+
+    .service-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .service-desc {
+      color: var(--text-secondary);
+      font-size: 0.96rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin-top: auto;
+      padding-top: 1.15rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .service-features li {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.86rem;
+      color: #CBD5E1;
+    }
+
+    .service-features li i,
+    .service-features li svg {
+      color: var(--accent-cyan);
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================================
+       6. SHOWCASE EM CARROSSEL INFINITO (SWIPER MARQUEE)
+       ========================================================================== */
+    .showcase-section {
+      padding: 6rem 0;
+      overflow: hidden;
+      background: linear-gradient(180deg, transparent 0%, rgba(19, 17, 28, 0.55) 50%, transparent 100%);
+    }
+
+    .showcase-swiper {
+      width: 100%;
+      padding: 1.5rem 0 2.5rem;
+    }
+
+    .showcase-swiper .swiper-wrapper {
+      transition-timing-function: linear !important;
+    }
+
+    .showcase-slide {
+      width: 370px;
+      height: 460px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--bg-surface);
+      cursor: pointer;
+    }
+
+    .showcase-slide img,
+    .showcase-slide video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .showcase-slide:hover img,
+    .showcase-slide:hover video {
+      transform: scale(1.09);
+    }
+
+    .showcase-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10, 10, 16, 0.1) 0%, rgba(10, 10, 16, 0.3) 45%, rgba(10, 10, 16, 0.94) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.35rem;
+    }
+
+    .showcase-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .category-badge {
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      background: rgba(19, 17, 28, 0.78);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(139, 92, 246, 0.45);
+      color: #E9D5FF;
+    }
+
+    .category-badge.cyan {
+      border-color: rgba(6, 182, 212, 0.5);
+      color: #A5F3FC;
+    }
+
+    .category-badge.magenta {
+      border-color: rgba(236, 72, 153, 0.5);
+      color: #FBCFE8;
+    }
+
+    .showcase-info h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .showcase-info p {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       7. COMPARATIVO INTERATIVO (ANTES & DEPOIS - COLOR GRADING)
+       ========================================================================== */
+    .comparison-wrapper {
+      max-width: 1020px;
+      margin: 0 auto;
+    }
+
+    .comparison-container {
+      position: relative;
+      width: 100%;
+      height: clamp(320px, 54vw, 560px);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      user-select: none;
+      border: 1px solid rgba(139, 92, 246, 0.4);
+      box-shadow: var(--shadow-glow);
+      background: #09090f;
+    }
+
+    .comparison-layer {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .comparison-layer img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    /* Imagem editada / Color Graded (Fundo completo) */
+    .layer-after img {
+      filter: contrast(1.18) saturate(1.38) brightness(1.03);
+    }
+
+    .layer-after::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.16), rgba(6, 182, 212, 0.14));
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+
+    /* Imagem RAW / D-Log (Recortada via clip-path dinâmico) */
+    .layer-before {
+      clip-path: inset(0 50% 0 0);
+      z-index: 2;
+    }
+
+    .layer-before img {
+      filter: saturate(0.28) contrast(0.78) brightness(1.04) sepia(0.08);
+    }
+
+    .comparison-label {
+      position: absolute;
+      bottom: 1.25rem;
+      padding: 0.45rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(10, 10, 16, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .label-before {
+      left: 1.25rem;
+      color: #CBD5E1;
+    }
+
+    .label-after {
+      right: 1.25rem;
+      color: #67E8F9;
+      border-color: rgba(6, 182, 212, 0.45);
+    }
+
+    .comparison-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 3px;
+      background: linear-gradient(180deg, var(--accent-cyan), var(--accent-magenta));
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.9);
+      z-index: 5;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .comparison-knob {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 2px solid var(--accent-cyan);
+      box-shadow: 0 0 25px rgba(6, 182, 212, 0.8), 0 0 40px rgba(139, 92, 246, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .comparison-range {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: ew-resize;
+      z-index: 6;
+      margin: 0;
+    }
+
+    /* ==========================================================================
+       8. ESPECIFICAÇÕES TÉCNICAS & DIFERENCIAIS
+       ========================================================================== */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .spec-card {
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    .spec-icon {
+      width: 54px;
+      height: 54px;
+      margin: 0 auto 1.15rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(6, 182, 212, 0.12);
+      border: 1px solid rgba(6, 182, 212, 0.35);
+      color: var(--accent-cyan);
+    }
+
+    .spec-metric {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.3rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+      background: var(--grad-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .spec-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .spec-text {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+
+    .tech-Subgrid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .tech-pill-card {
+      padding: 1.5rem 1.75rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.1rem;
+    }
+
+    .tech-pill-card .icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(236, 72, 153, 0.14);
+      border: 1px solid rgba(236, 72, 153, 0.4);
+      color: #F472B6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .tech-pill-card h4 {
+      font-size: 1.05rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .tech-pill-card p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       9. PROCESSO DE PRODUÇÃO (TIMELINE NUMERADA)
+       ========================================================================== */
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    .timeline-step {
+      padding: 2.1rem 1.65rem;
+      position: relative;
+    }
+
+    .step-number {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem;
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(6, 182, 212, 0.35));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1.1rem;
+      display: inline-block;
+    }
+
+    .step-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+    }
+
+    .step-desc {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       10. PERGUNTAS FREQUENTES (FAQ ACORDEÃO)
+       ========================================================================== */
+    .faq-list {
+      max-width: 840px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .faq-item {
+      border-radius: var(--radius-md);
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+      transition: var(--transition-smooth);
+    }
+
+    .faq-item.active {
+      border-color: rgba(139, 92, 246, 0.55);
+      box-shadow: 0 0 28px rgba(139, 92, 246, 0.16);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      padding: 1.4rem 1.65rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      cursor: pointer;
+    }
+
+    .faq-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(139, 92, 246, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #C4B5FD;
+      transition: transform 0.35s ease, background 0.35s ease;
+      flex-shrink: 0;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+      background: var(--grad-primary);
+      color: #fff;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .faq-answer-inner {
+      padding: 0 1.65rem 1.45rem;
+      color: var(--text-secondary);
+      font-size: 0.96rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 1rem;
+    }
+
+    /* ==========================================================================
+       11. FORMULÁRIO DE CONTATO & RODAPÉ
+       ========================================================================== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .contact-info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 1.35rem;
+    }
+
+    .contact-info-item .icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: rgba(139, 92, 246, 0.16);
+      border: 1px solid rgba(139, 92, 246, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #C4B5FD;
+      flex-shrink: 0;
+    }
+
+    .contact-form-card {
+      padding: 2.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.35rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.15rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #CBD5E1;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.9rem 1.1rem;
+      border-radius: var(--radius-sm);
+      background: rgba(10, 10, 16, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: var(--transition-smooth);
+      outline: none;
+    }
+
+    .form-control:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-feedback {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.9rem 1.1rem;
+      border-radius: var(--radius-sm);
+      background: rgba(6, 182, 212, 0.15);
+      border: 1px solid rgba(6, 182, 212, 0.45);
+      color: #A5F3FC;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 3.5rem 0 2.5rem;
+      background: #07070B;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .social-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      transition: var(--transition-smooth);
+    }
+
+    .social-btn:hover {
+      color: #fff;
+      border-color: var(--accent-purple);
+      background: rgba(139, 92, 246, 0.25);
+      transform: translateY(-3px);
+    }
+
+    /* Botão Flutuante WhatsApp */
+    .whatsapp-float {
+      position: fixed;
+      right: 1.65rem;
+      bottom: 1.65rem;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.85rem 1.35rem;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.45);
+      transition: var(--transition-smooth);
+    }
+
+    .whatsapp-float:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 14px 36px rgba(16, 185, 129, 0.65);
+    }
+
+    /* ==========================================================================
+       12. RESPONSIVIDADE (MOBILE & TABLET)
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .services-grid,
+      .tech-Subgrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .specs-grid,
+      .timeline-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section-padding {
+        padding: 4.5rem 0;
+      }
+
+      .mobile-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: 1rem;
+        right: 1rem;
+        background: rgba(19, 17, 28, 0.96);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(139, 92, 246, 0.35);
+        border-radius: var(--radius-md);
+        flex-direction: column;
+        padding: 1.75rem;
+        gap: 1.25rem;
+        transform: translateY(-140%);
+        opacity: 0;
+        pointer-events: none;
+        transition: var(--transition-smooth);
+      }
+
+      .nav-links.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .hero-hud {
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+      }
+
+      .hud-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding-bottom: 0.65rem;
+      }
+
+      .hud-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .services-grid,
+      .specs-grid,
+      .tech-Subgrid,
+      .timeline-grid,
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .showcase-slide {
+        width: 295px;
+        height: 390px;
+      }
+
+      .whatsapp-float span {
+        display: none;
+      }
+      .whatsapp-float {
+        padding: 0.95rem;
+        border-radius: 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       HEADER / NAVBAR
+       ======================================================================== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-logo">
+        <span class="brand-icon">
+          <i data-lucide="aperture"></i>
+        </span>
+        <span>SE7E<span class="text-gradient">FPV</span></span>
+      </a>
+
+      <nav aria-label="Navegação Principal">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#showcase">Portfólio</a></li>
+          <li><a href="#color-grading">Antes & Depois</a></li>
+          <li><a href="#especificacoes">Diferenciais</a></li>
+          <li><a href="#processo">Processo</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <a href="#contato" class="btn btn-primary nav-cta">
+        <span>Orçamento Rápido</span>
+        <i data-lucide="arrow-up-right" style="width:18px;height:18px;"></i>
+      </a>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ======================================================================
+         1. HERO SECTION (IMPACTO IMEDIATO)
+         ====================================================================== -->
+    <section class="hero" id="hero">
+      <div class="hero-video-wrapper">
+        <!-- ==================================================================
+             SUBSTITUIR POR VÍDEO DO CLIENTE: HERO BACKGROUND (SHOWREEL DRONE / FPV)
+             ================================================================== -->
+        <video
+          class="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          poster="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1920&q=80"
+        >
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-at-night-11-large.mp4" type="video/mp4" />
+          <source src="https://www.pexels.com/download/video/3129957/" type="video/mp4" />
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-grid-overlay"></div>
+      </div>
+
+      <div class="container hero-content">
+        <div class="hero-pill" data-aos="fade-down" data-aos-duration="800">
+          <span class="live-dot"></span>
+          <span>Cinematografia Aérea & Drone FPV Cinema</span>
+        </div>
+
+        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+          Perspectivas Que <span class="text-gradient">Elevam Sua Marca</span>
+        </h1>
+
+        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+          Tomadas aéreas ultra-dinâmicas com Drone FPV, filmes institucionais imersivos e captação em 4K/60fps D-Log para transformar a percepção de valor do seu negócio.
+        </p>
+
+        <div class="hero-actions" data-aos="fade-up" data-aos-delay="300">
+          <a href="#contato" class="btn btn-primary">
+            <i data-lucide="sparkles"></i>
+            <span>Solicitar Orçamento</span>
+          </a>
+          <a href="#showcase" class="btn btn-secondary">
+            <i data-lucide="play-circle"></i>
+            <span>Ver Demonstrações</span>
+          </a>
+        </div>
+
+        <div class="hero-hud" data-aos="fade-up" data-aos-delay="400">
+          <div class="hud-item">
+            <span class="hud-value">4K / 60fps</span>
+            <span class="hud-label">10-Bit Color D-Log M</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-value">140 km/h</span>
+            <span class="hud-label">Velocidade FPV Cinema</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-value">100% Legal</span>
+            <span class="hud-label">ANAC • DECEA • ANATEL</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         2. DESTAQUES & SERVIÇOS (GRID COM SCROLL REVEAL)
+         ====================================================================== -->
+    <section class="section-padding" id="servicos">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-badge">
+            <i data-lucide="layers" style="width:15px;height:15px;"></i>
+            Soluções Audiovisuais
+          </span>
+          <h2 class="section-title">Engenharia Visual Para <span class="text-gradient">Alto Impacto</span></h2>
+          <p class="section-subtitle">
+            Combinamos pilotagem de precisão milimétrica, sensores de cinema e narrativa criativa para vídeos impossíveis de serem ignorados.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <!-- Card 1: Drone FPV Dinâmico -->
+          <article class="glass-card service-card" data-aos="fade-up" data-aos-delay="100">
+            <div>
+              <div class="service-media">
+                <!-- ==========================================================
+                     SUBSTITUIR POR VÍDEO DO CLIENTE: CARD 01 - DRONE FPV DINÂMICO
+                     ========================================================== -->
+                <video
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  poster="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=800&q=80"
+                >
+                  <source src="https://assets.mixkit.co/videos/preview/mixkit-fast-aerial-view-of-a-mountain-range-41492-large.mp4" type="video/mp4" />
+                </video>
+                <span class="service-tag">FPV Cinema</span>
+              </div>
+
+              <div class="service-icon-box">
+                <i data-lucide="zap"></i>
+              </div>
+              <h3 class="service-title">Drone FPV Dinâmico</h3>
+              <p class="service-desc">
+                Imersão total em primeira pessoa. Perseguições em alta velocidade, mergulhos em fachadas e planos-sequência contínuos (One-Take) cruzando ambientes internos e externos.
+              </p>
+            </div>
+
+            <ul class="service-features">
+              <li><i data-lucide="check-circle-2"></i> Cinewhoops seguros para voos indoor com pessoas</li>
+              <li><i data-lucide="check-circle-2"></i> Estabilização Gyroflow em 4K ultra fluido</li>
+              <li><i data-lucide="check-circle-2"></i> Ideal para eventos, esportes, indústrias e resorts</li>
+            </ul>
+          </article>
+
+          <!-- Card 2: Cinematografia Comercial -->
+          <article class="glass-card service-card" data-aos="fade-up" data-aos-delay="200">
+            <div>
+              <div class="service-media">
+                <!-- ==========================================================
+                     SUBSTITUIR POR VÍDEO DO CLIENTE: CARD 02 - CINEMATOGRAFIA COMERCIAL
+                     ========================================================== -->
+                <video
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  poster="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=800&q=80"
+                >
+                  <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-buildings-on-a-sunny-day-41463-large.mp4" type="video/mp4" />
+                </video>
+                <span class="service-tag">Estabilizado 4K</span>
+              </div>
+
+              <div class="service-icon-box">
+                <i data-lucide="video"></i>
+              </div>
+              <h3 class="service-title">Cinematografia Comercial</h3>
+              <p class="service-desc">
+                Planos suaves, órbitas perfeitas e revelações grandiosas em 4K/60fps para lançamentos imobiliários de alto padrão, filmes institucionais e campanhas publicitárias.
+              </p>
+            </div>
+
+            <ul class="service-features">
+              <li><i data-lucide="check-circle-2"></i> Lentes teleobjetivas e grande-angulares luminosas</li>
+              <li><i data-lucide="check-circle-2"></i> Fotografia aérea HDR em RAW de alta resolução</li>
+              <li><i data-lucide="check-circle-2"></i> Mapeamento visual de terrenos e empreendimentos</li>
+            </ul>
+          </article>
+
+          <!-- Card 3: Pós-produção Completa -->
+          <article class="glass-card service-card" data-aos="fade-up" data-aos-delay="300">
+            <div>
+              <div class="service-media">
+                <img
+                  src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80"
+                  alt="Estúdio de Color Grading e Pós-Produção Audiovisual"
+                  loading="lazy"
+                />
+                <span class="service-tag">Finishing Suite</span>
+              </div>
+
+              <div class="service-icon-box">
+                <i data-lucide="sliders"></i>
+              </div>
+              <h3 class="service-title">Pós-produção Completa</h3>
+              <p class="service-desc">
+                Transformamos o material bruto em cinema. Color grading profissional em DaVinci Resolve, Sound Design tridimensional (SFX), speed ramping e cortes rítmicos.
+              </p>
+            </div>
+
+            <ul class="service-features">
+              <li><i data-lucide="check-circle-2"></i> Masterização vertical nativa para Reels, Shorts & TikTok</li>
+              <li><i data-lucide="check-circle-2"></i> Desenho de som imersivo (motores, vento, ambiência)</li>
+              <li><i data-lucide="check-circle-2"></i> Motion Graphics e inserção de textos 3D no espaço</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3. SHOWCASE EM CARROSSEL INFINITO (SWIPER MARQUEE)
+         ====================================================================== -->
+    <section class="showcase-section" id="showcase">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-badge">
+            <i data-lucide="film" style="width:15px;height:15px;"></i>
+            Portfólio em Movimento
+          </span>
+          <h2 class="section-title">Projetos Que <span class="text-gradient">Desafiam a Gravidade</span></h2>
+          <p class="section-subtitle">
+            Explore algumas das nossas produções aéreas para marcas, construtoras, eventos esportivos e experiências turísticas.
+          </p>
+        </div>
+      </div>
+
+      <!-- Carrossel Contínuo (Infinite Marquee) -->
+      <div class="swiper showcase-swiper" data-aos="fade-up" data-aos-delay="150">
+        <div class="swiper-wrapper">
+          <!-- Slide 1 (Vídeo em Loop) -->
+          <div class="swiper-slide showcase-slide">
+            <!-- ==============================================================
+                 SUBSTITUIR POR VÍDEO DO CLIENTE: SHOWCASE 01 - IMOBILIÁRIO
+                 ============================================================== -->
+            <video
+              autoplay
+              muted
+              loop
+              playsinline
+              poster="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
+            >
+              <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-luxurious-hotel-near-the-sea-41465-large.mp4" type="video/mp4" />
+            </video>
+            <div class="showcase-overlay">
+              <div class="showcase-top">
+                <span class="category-badge cyan">Imobiliário</span>
+                <i data-lucide="play" style="color:#fff;width:20px;height:20px;"></i>
+              </div>
+              <div class="showcase-info">
+                <h3>Horizon Residence</h3>
+                <p>Tour One-Take FPV + Fachada Sunset 4K</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 (Imagem Vertical Unsplash) -->
+          <div class="swiper-slide showcase-slide">
+            <img
+              src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80"
+              alt="Perseguição Automotiva com Drone FPV"
+              loading="lazy"
+            />
+            <div class="showcase-overlay">
+              <div class="showcase-top">
+                <span class="category-badge magenta">Esportes & Drift</span>
+                <i data-lucide="aperture" style="color:#fff;width:20px;height:20px;"></i>
+              </div>
+              <div class="showcase-info">
+                <h3>Apex Track Day</h3>
+                <p>Perseguição a 130 km/h com Drone FPV</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3 (Vídeo em Loop) -->
+          <div class="swiper-slide showcase-slide">
+            <!-- ==============================================================
+                 SUBSTITUIR POR VÍDEO DO CLIENTE: SHOWCASE 02 - COMERCIAL NOTURNO
+                 ============================================================== -->
+            <video
+              autoplay
+              muted
+              loop
+              playsinline
+              poster="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80"
+            >
+              <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-at-night-11-large.mp4" type="video/mp4" />
+            </video>
+            <div class="showcase-overlay">
+              <div class="showcase-top">
+                <span class="category-badge">Comercial</span>
+                <i data-lucide="play" style="color:#fff;width:20px;height:20px;"></i>
+              </div>
+              <div class="showcase-info">
+                <h3>Metropolis Night Pulse</h3>
+                <p>Captação Noturna em Low-Light ISO Nativo</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 4 (Imagem Unsplash) -->
+          <div class="swiper-slide showcase-slide">
+            <img
+              src="https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&w=800&q=80"
+              alt="Drone Cinematográfico sobrevoando costa"
+              loading="lazy"
+            />
+            <div class="showcase-overlay">
+              <div class="showcase-top">
+                <span class="category-badge cyan">Turismo & Resorts</span>
+                <i data-lucide="compass" style="color:#fff;width:20px;height:20px;"></i>
+              </div>
+              <div class="showcase-info">
+                <h3>Reserva Costa Azul</h3>
+                <p>Campanha Internacional de Hospitalidade</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 5 (Imagem Unsplash) -->
+          <div class="swiper-slide showcase-slide">
+            <img
+              src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=800&q=80"
+              alt="Drone FPV Indoor Industrial"
+              loading="lazy"
+            />
+            <div class="showcase-overlay">
+              <div class="showcase-top">
+                <span class="category-badge">Institucional</span>
+                <i data-lucide="cpu" style="color:#fff;width:20px;height:20px;"></i>
+              </div>
+              <div class="showcase-info">
+                <h3>Complexo Logístico V8</h3>
+                <p>Voo Contínuo Indoor entre Galpões e Frota</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 6 (Imagem Unsplash) -->
+          <div class="swiper-slide showcase-slide">
+            <img
+              src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=80"
+              alt="Cobertura aérea de grandes festivais"
+              loading="lazy"
+            />
+            <div class="showcase-overlay">
+              <div class="showcase-top">
+                <span class="category-badge magenta">Eventos & Shows</span>
+                <i data-lucide="music" style="color:#fff;width:20px;height:20px;"></i>
+              </div>
+              <div class="showcase-info">
+                <h3>Neon Pulse Festival</h3>
+                <p>Aftermovie Aéreo + Palco Principal</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         4. COMPARATIVO INTERATIVO (ANTES & DEPOIS - COLOR GRADING)
+         ====================================================================== -->
+    <section class="section-padding" id="color-grading">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-badge">
+            <i data-lucide="palette" style="width:15px;height:15px;"></i>
+            Color Grading Cinematográfico
+          </span>
+          <h2 class="section-title">Da Captura <span class="text-gradient">RAW D-Log ao Cinema</span></h2>
+          <p class="section-subtitle">
+            Arraste o controle deslizante para comparar o arquivo bruto captado pelo sensor do drone (10-Bit D-Log) com o tratamento final de cor e atmosfera.
+          </p>
+        </div>
+
+        <div class="comparison-wrapper" data-aos="zoom-in" data-aos-delay="100">
+          <div class="comparison-container" id="comparisonWidget">
+            <!-- Camada DEPOIS (Color Graded Final) -->
+            <div class="comparison-layer layer-after">
+              <img
+                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=85"
+                alt="Frame Aéreo com Color Grading Cinematográfico Finalizado"
+              />
+            </div>
+
+            <!-- Camada ANTES (Perfil Log Sem Correção) -->
+            <div class="comparison-layer layer-before" id="layerBefore">
+              <img
+                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=85"
+                alt="Frame Aéreo em Perfil Log Bruto sem Correção"
+              />
+            </div>
+
+            <span class="comparison-label label-before">ANTES • RAW D-LOG 10-BIT</span>
+            <span class="comparison-label label-after">DEPOIS • COLOR GRADING + LUT CINEMA</span>
+
+            <!-- Barra divisória -->
+            <div class="comparison-handle" id="comparisonHandle">
+              <div class="comparison-knob">
+                <i data-lucide="move-horizontal"></i>
+              </div>
+            </div>
+
+            <!-- Input Range Acessível para Mouse e Touch -->
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="50"
+              class="comparison-range"
+              id="comparisonRange"
+              aria-label="Comparar imagem antes e depois do Color Grading"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. ESPECIFICAÇÕES TÉCNICAS & DIFERENCIAIS
+         ====================================================================== -->
+    <section class="section-padding" id="especificacoes">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-badge">
+            <i data-lucide="shield-check" style="width:15px;height:15px;"></i>
+            Performance & Segurança
+          </span>
+          <h2 class="section-title">Tecnologia de Ponta & <span class="text-gradient">Operação Certificada</span></h2>
+          <p class="section-subtitle">
+            Equipamentos redundantes e conformidade total com a legislação aeronáutica brasileira para garantir tranquilidade em qualquer set de filmagem.
+          </p>
+        </div>
+
+        <!-- Métricas Animadas -->
+        <div class="specs-grid">
+          <div class="glass-card spec-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="spec-icon">
+              <i data-lucide="tv"></i>
+            </div>
+            <div class="spec-metric">
+              <span class="counter" data-target="60">0</span>fps
+            </div>
+            <h3 class="spec-title">Resolução 4K Nativa</h3>
+            <p class="spec-text">Taxa de bits de até 150 Mbps para nitidez cristalina e slow-motion fluido.</p>
+          </div>
+
+          <div class="glass-card spec-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="spec-icon">
+              <i data-lucide="award"></i>
+            </div>
+            <div class="spec-metric">
+              <span class="counter" data-target="100">0</span>%
+            </div>
+            <h3 class="spec-title">Certificação ANAC</h3>
+            <p class="spec-text">Pilotos habilitados com planos de voo aprovados via SARPAS / DECEA e seguro RETA.</p>
+          </div>
+
+          <div class="glass-card spec-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="spec-icon">
+              <i data-lucide="gauge"></i>
+            </div>
+            <div class="spec-metric">
+              <span class="counter" data-target="140">0</span>km/h
+            </div>
+            <h3 class="spec-title">FPV Alta Velocidade</h3>
+            <p class="spec-text">Drones customizados de fibra de carbono para acompanhar veículos e atletas.</p>
+          </div>
+
+          <div class="glass-card spec-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="spec-icon">
+              <i data-lucide="shield"></i>
+            </div>
+            <div class="spec-metric">
+              <span class="counter" data-target="360">0</span>°
+            </div>
+            <h3 class="spec-title">Voos Indoor Seguros</h3>
+            <p class="spec-text">Cinewhoops com proteção integral de hélices em duto para voar próximo a pessoas.</p>
+          </div>
+        </div>
+
+        <!-- Diferenciais Complementares -->
+        <div class="tech-Subgrid">
+          <div class="glass-card tech-pill-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon-wrap">
+              <i data-lucide="radio"></i>
+            </div>
+            <div>
+              <h4>Transmissão Ao Vivo no Set</h4>
+              <p>Monitoramento em tempo real para o diretor ou cliente acompanhar cada take durante o voo.</p>
+            </div>
+          </div>
+
+          <div class="glass-card tech-pill-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-wrap">
+              <i data-lucide="sun"></i>
+            </div>
+            <div>
+              <h4>Filtros Cinema ND & Polarizadores</h4>
+              <p>Controle rigoroso de shutter speed (regra dos 180°) para motion blur natural de cinema.</p>
+            </div>
+          </div>
+
+          <div class="glass-card tech-pill-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="icon-wrap">
+              <i data-lucide="battery-charging"></i>
+            </div>
+            <div>
+              <h4>Autonomia Estendida em Campo</h4>
+              <p>Estação de energia portátil e múltiplas baterias inteligentes para diárias intensivas sem pausas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         6. PROCESSO DE PRODUÇÃO (ETAPAS NUMERADAS)
+         ====================================================================== -->
+    <section class="section-padding" id="processo">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-badge">
+            <i data-lucide="git-branch" style="width:15px;height:15px;"></i>
+            Fluxo de Trabalho
+          </span>
+          <h2 class="section-title">Da Ideia à <span class="text-gradient">Entrega Final</span></h2>
+          <p class="section-subtitle">
+            Um processo estruturado em 4 etapas para garantir previsibilidade, segurança operacional e excelência estética.
+          </p>
+        </div>
+
+        <div class="timeline-grid">
+          <div class="glass-card timeline-step" data-aos="fade-up" data-aos-delay="100">
+            <span class="step-number">01</span>
+            <h3 class="step-title">Planejamento e Roteiro</h3>
+            <p class="step-desc">
+              Briefing estratégico, decupagem dos movimentos de câmera (trajetória FPV ou planos estabilizados) e emissão das autorizações de voo no DECEA.
+            </p>
+          </div>
+
+          <div class="glass-card timeline-step" data-aos="fade-up" data-aos-delay="200">
+            <span class="step-number">02</span>
+            <h3 class="step-title">Captação Aérea</h3>
+            <p class="step-desc">
+              Execução em campo na janela de luz ideal (Golden Hour ou noturno), com checklist completo de segurança e acompanhamento em monitor externo.
+            </p>
+          </div>
+
+          <div class="glass-card timeline-step" data-aos="fade-up" data-aos-delay="300">
+            <span class="step-number">03</span>
+            <h3 class="step-title">Edição e Color Grading</h3>
+            <p class="step-desc">
+              Estabilização avançada via telemetria giroscópica, corte dinâmico na batida da trilha, sound design imersivo e correção de cor cinematográfica.
+            </p>
+          </div>
+
+          <div class="glass-card timeline-step" data-aos="fade-up" data-aos-delay="400">
+            <span class="step-number">04</span>
+            <h3 class="step-title">Entrega Otimizada</h3>
+            <p class="step-desc">
+              Exportação nas proporções exatas da sua campanha (16:9 Horizontal para YouTube/TV e 9:16 Vertical para Reels/TikTok) em nuvem de alta velocidade.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         7. PERGUNTAS FREQUENTES (FAQ ACORDEÃO)
+         ====================================================================== -->
+    <section class="section-padding" id="faq">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-badge">
+            <i data-lucide="help-circle" style="width:15px;height:15px;"></i>
+            Tire Suas Dúvidas
+          </span>
+          <h2 class="section-title">Perguntas <span class="text-gradient">Frequentes</span></h2>
+          <p class="section-subtitle">
+            Tudo o que você precisa saber sobre licenças de voo, segurança indoor, prazos e condições climáticas.
+          </p>
+        </div>
+
+        <div class="faq-list" data-aos="fade-up" data-aos-delay="100">
+          <!-- FAQ 1 -->
+          <div class="faq-item active">
+            <button class="faq-question" aria-expanded="true">
+              <span>Vocês possuem todas as licenças e autorizações para voar?</span>
+              <span class="faq-icon"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+            </button>
+            <div class="faq-answer" style="max-height: 240px;">
+              <div class="faq-answer-inner">
+                Sim. Todas as nossas aeronaves são homologadas pela ANATEL, cadastradas no SISANT (ANAC) e operadas com solicitação de espaço aéreo via SARPAS (DECEA), além de seguro aeronáutico RETA vigente para máxima segurança jurídica do contratante.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>É seguro voar com Drone FPV dentro de lojas, galpões ou eventos com público?</span>
+              <span class="faq-icon"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Totalmente seguro. Para captações indoor ou próximas a pessoas, utilizamos micro-drones Cinewhoop ultraleves equipados com protetores de hélices integrais em espuma e policarbonato, permitindo passar por portas, corredores e vitrines sem riscos.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Qual é o prazo médio de entrega dos vídeos editados?</span>
+              <span class="faq-icon"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Os arquivos brutos selecionados podem ser entregues em até 24 horas após a diária. Já os vídeos finalizados com edição completa, sound design e color grading são entregues entre 3 a 5 dias úteis (com opção de entrega expressa Same-Day Edit para eventos).
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Como funciona caso chova ou vente muito no dia agendado?</span>
+              <span class="faq-icon"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Monitoramos a meteorologia e a velocidade do vento com 72 horas de antecedência. Caso as condições climáticas impeçam um voo seguro ou comprometam a estética da luz, fazemos o reagendamento imediato para a próxima janela favorável sem qualquer taxa adicional.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         8. FORMULÁRIO DE CONTATO & ORÇAMENTO
+         ====================================================================== -->
+    <section class="section-padding" id="contato">
+      <div class="container">
+        <div class="contact-grid">
+          <div data-aos="fade-right">
+            <span class="section-badge">
+              <i data-lucide="send" style="width:15px;height:15px;"></i>
+              Vamos Voar Juntos
+            </span>
+            <h2 class="section-title">Pronto Para Elevar o <span class="text-gradient">Nível da Sua Produção?</span></h2>
+            <p class="section-subtitle" style="margin-bottom: 1.5rem;">
+              Preencha os detalhes do seu projeto e receba uma proposta personalizada em poucos minutos diretamente no seu WhatsApp ou e-mail.
+            </p>
+
+            <div class="contact-info-list">
+              <div class="glass-card contact-info-item">
+                <div class="icon"><i data-lucide="phone-call"></i></div>
+                <div>
+                  <h4 style="font-size:0.95rem;">Atendimento Direto / WhatsApp</h4>
+                  <p style="color:var(--text-secondary);font-size:0.9rem;">+55 (11) 99999-7777 • Resposta imediata</p>
+                </div>
+              </div>
+
+              <div class="glass-card contact-info-item">
+                <div class="icon"><i data-lucide="map-pin"></i></div>
+                <div>
+                  <h4 style="font-size:0.95rem;">Disponibilidade Geográfica</h4>
+                  <p style="color:var(--text-secondary);font-size:0.9rem;">Base em São Paulo • Atendimento em todo o Brasil</p>
+                </div>
+              </div>
+
+              <div class="glass-card contact-info-item">
+                <div class="icon"><i data-lucide="mail"></i></div>
+                <div>
+                  <h4 style="font-size:0.95rem;">Contato Comercial</h4>
+                  <p style="color:var(--text-secondary);font-size:0.9rem;">contato@se7efpv.com.br</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card contact-form-card" data-aos="fade-left">
+            <form id="leadForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="nome">Seu Nome / Empresa *</label>
+                  <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    class="form-control"
+                    placeholder="Ex.: Lucas Andrade - Construtora"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="whatsapp">WhatsApp com DDD *</label>
+                  <input
+                    type="tel"
+                    id="whatsapp"
+                    name="whatsapp"
+                    class="form-control"
+                    placeholder="(11) 99999-9999"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="tipoCaptacao">Tipo de Captação Desejada *</label>
+                <select id="tipoCaptacao" name="tipoCaptacao" class="form-control" required>
+                  <option value="" disabled selected>Selecione a modalidade principal...</option>
+                  <option value="Tour One-Take com Drone FPV (Indoor/Outdoor)">Tour One-Take com Drone FPV (Indoor/Outdoor)</option>
+                  <option value="Cinematografia Aérea 4K (Imobiliário / Institucional)">Cinematografia Aérea 4K (Imobiliário / Institucional)</option>
+                  <option value="Cobertura de Evento / Esportes com FPV + Estabilizado">Cobertura de Evento / Esportes com FPV + Estabilizado</option>
+                  <option value="Pacote Completo (Captação + Edição + Reels)">Pacote Completo (Captação + Edição + Reels)</option>
+                  <option value="Diária Bruta para Produtoras / Agências">Diária Bruta para Produtoras / Agências</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="mensagem">Detalhes do Projeto & Local da Filmagem</label>
+                <textarea
+                  id="mensagem"
+                  name="mensagem"
+                  class="form-control"
+                  placeholder="Conte-nos brevemente sobre o local, data prevista e objetivo do vídeo..."
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%;">
+                <i data-lucide="send"></i>
+                <span>Solicitar Proposta no WhatsApp</span>
+              </button>
+
+              <div class="form-feedback" id="formFeedback">
+                Redirecionando para o WhatsApp com os dados do seu orçamento...
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       RODAPÉ (FOOTER)
+       ======================================================================== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <a href="#hero" class="brand-logo" style="margin-bottom: 0.4rem;">
+          <span class="brand-icon">
+            <i data-lucide="aperture"></i>
+          </span>
+          <span>SE7E<span class="text-gradient">FPV</span></span>
+        </a>
+        <p style="color: var(--text-muted); font-size: 0.85rem;">
+          © 2026 SE7E AirCinema & FPV Productions. Todos os direitos reservados.
+        </p>
+      </div>
+
+      <div class="footer-socials">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram">
+          <i data-lucide="instagram" style="width:18px;height:18px;"></i>
+        </a>
+        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="YouTube">
+          <i data-lucide="youtube" style="width:18px;height:18px;"></i>
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn">
+          <i data-lucide="linkedin" style="width:18px;height:18px;"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       BOTÃO FLUTUANTE WHATSAPP
+       ======================================================================== -->
+  <a
+    href="https://wa.me/5511999997777?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento%20para%20capta%C3%A7%C3%A3o%20com%20Drone%20%2F%20FPV."
+    target="_blank"
+    rel="noopener noreferrer"
+    class="whatsapp-float"
+    aria-label="Falar no WhatsApp"
+  >
+    <i data-lucide="message-circle" style="width:22px;height:22px;"></i>
+    <span>Orçamento via WhatsApp</span>
+  </a>
+
+  <!-- ========================================================================
+       SCRIPTS EXTERNOS (CDN) + LÓGICA INTERATIVA
+       ======================================================================== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Inicializar Ícones Lucide
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+
+      // 2. Inicializar AOS (Animate On Scroll)
+      if (window.AOS) {
+        AOS.init({
+          duration: 800,
+          easing: 'ease-out-cubic',
+          once: true,
+          offset: 60
+        });
+      }
+
+      // 3. Navbar Glassmorphism no Scroll + Menu Mobile
+      const navbar = document.getElementById('navbar');
+      const mobileToggle = document.getElementById('mobileToggle');
+      const navLinks = document.getElementById('navLinks');
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      }, { passive: true });
+
+      mobileToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+      });
+
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => navLinks.classList.remove('open'));
+      });
+
+      // 4. Carrossel Infinito Contínuo (Swiper Marquee)
+      new Swiper('.showcase-swiper', {
+        slidesPerView: 'auto',
+        spaceBetween: 24,
+        loop: true,
+        speed: 6500,
+        allowTouchMove: true,
+        grabCursor: true,
+        autoplay: {
+          delay: 0,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true
+        }
+      });
+
+      // 5. Comparativo Interativo (Before / After Color Grading)
+      const comparisonRange = document.getElementById('comparisonRange');
+      const layerBefore = document.getElementById('layerBefore');
+      const comparisonHandle = document.getElementById('comparisonHandle');
+
+      const updateComparison = (val) => {
+        const percentage = Number(val);
+        layerBefore.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+        comparisonHandle.style.left = `${percentage}%`;
+      };
+
+      if (comparisonRange) {
+        comparisonRange.addEventListener('input', (e) => updateComparison(e.target.value));
+      }
+
+      // 6. Contadores Animados de Especificações (IntersectionObserver)
+      const counters = document.querySelectorAll('.counter');
+      const animateCounter = (el) => {
+        const target = parseInt(el.getAttribute('data-target'), 10);
+        const duration = 1600;
+        const startTime = performance.now();
+
+        const step = (now) => {
+          const progress = Math.min((now - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.floor(eased * target);
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            el.textContent = target;
+          }
+        };
+        requestAnimationFrame(step);
+      };
+
+      const counterObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+
+      counters.forEach(counter => counterObserver.observe(counter));
+
+      // 7. Acordeão FAQ
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        const btn = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+
+        btn.addEventListener('click', () => {
+          const isOpen = item.classList.contains('active');
+
+          // Fecha os demais itens
+          faqItems.forEach(other => {
+            other.classList.remove('active');
+            other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+            other.querySelector('.faq-answer').style.maxHeight = null;
+          });
+
+          // Abre o item clicado caso estivesse fechado
+          if (!isOpen) {
+            item.classList.add('active');
+            btn.setAttribute('aria-expanded', 'true');
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+          }
+        });
+      });
+
+      // 8. Envio do Formulário Direto para WhatsApp
+      const leadForm = document.getElementById('leadForm');
+      const formFeedback = document.getElementById('formFeedback');
+
+      if (leadForm) {
+        leadForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const nome = document.getElementById('nome').value.trim();
+          const whatsapp = document.getElementById('whatsapp').value.trim();
+          const tipo = document.getElementById('tipoCaptacao').value;
+          const mensagem = document.getElementById('mensagem').value.trim();
+
+          formFeedback.style.display = 'block';
+
+          const textoWhatsApp = [
+            `Olá! Gostaria de solicitar um orçamento de captação aérea:`,
+            `• *Nome/Empresa:* ${nome}`,
+            `• *WhatsApp:* ${whatsapp}`,
+            `• *Modalidade:* ${tipo}`,
+            mensagem ? `• *Detalhes:* ${mensagem}` : ''
+          ].filter(Boolean).join('\n');
+
+          const numeroDestino = '5511999997777'; // Substituir pelo número oficial do cliente
+          const url = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(textoWhatsApp)}`;
+
+          setTimeout(() => {
+            window.open(url, '_blank', 'noopener,noreferrer');
+          }, 500);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
