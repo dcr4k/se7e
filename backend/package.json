@@ -1,0 +1,16 @@
+{
+  "name": "se7e-landing-cloud-function",
+  "version": "1.0.0",
+  "description": "Cloud Function (Node.js 20 - Gen 2) para captação de leads no Firestore e alerta no Telegram",
+  "main": "index.js",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "functions-framework --target=capturarLead"
+  },
+  "dependencies": {
+    "@google-cloud/firestore": "^7.10.0",
+    "@google-cloud/functions-framework": "^3.4.2"
+  }
+}

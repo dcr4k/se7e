@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SE7E AirCinema | Captação Aérea com Drone & FPV</title>
-  <meta name="description" content="Produção audiovisual de alto impacto com Drone FPV dinâmico, cinematografia aérea em 4K/60fps e pós-produção completa para elevar sua marca." />
+  <title>SE7E.ENT | Imagens Aéreas, Desenvolvimento Web & Tráfego Pago</title>
+  <meta name="description" content="Soluções completas de presença digital, tráfego pago e captação visual de alto impacto para elevar a autoridade do seu negócio." />
   <meta name="theme-color" content="#0A0A10" />
 
   <!-- Google Fonts: Montserrat & Inter -->
@@ -1306,6 +1306,133 @@
         padding: 0.95rem;
         border-radius: 50%;
       }
+      .services-checkbox-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    /* Chamada Comercial nos Cards de Serviço */
+    .service-callout {
+      margin-bottom: 1.25rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(90deg, rgba(139, 92, 246, 0.14), rgba(6, 182, 212, 0.08));
+      border-left: 3px solid var(--accent-cyan);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #E2E8F0;
+      line-height: 1.45;
+    }
+
+    /* Grid de Checkboxes de Serviços no Formulário */
+    .services-checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.35rem;
+    }
+
+    .checkbox-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius-sm);
+      background: rgba(10, 10, 16, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      user-select: none;
+    }
+
+    .checkbox-card:hover {
+      border-color: rgba(139, 92, 246, 0.5);
+      background: rgba(19, 17, 28, 0.9);
+    }
+
+    .checkbox-card input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      background: rgba(10, 10, 16, 0.9);
+      display: grid;
+      place-content: center;
+      transition: var(--transition-smooth);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .checkbox-card input[type="checkbox"]::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+      transform: scale(0);
+      transition: transform 0.18s ease-in-out;
+      background-color: #ffffff;
+    }
+
+    .checkbox-card input[type="checkbox"]:checked {
+      background: var(--grad-primary);
+      border-color: transparent;
+      box-shadow: 0 0 12px rgba(139, 92, 246, 0.55);
+    }
+
+    .checkbox-card input[type="checkbox"]:checked::before {
+      transform: scale(1);
+    }
+
+    .checkbox-card:has(input[type="checkbox"]:checked) {
+      border-color: var(--accent-cyan);
+      background: rgba(139, 92, 246, 0.14);
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.15);
+    }
+
+    .checkbox-card span {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    /* Estado de Loading no Botão de Envio */
+    .btn[disabled] {
+      opacity: 0.75;
+      cursor: not-allowed;
+      transform: none !important;
+      animation: none !important;
+    }
+
+    .spinner-icon {
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      animation: spinLoader 0.75s linear infinite;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    @keyframes spinLoader {
+      to { transform: rotate(360deg); }
+    }
+
+    .form-feedback.success {
+      display: block;
+      background: rgba(16, 185, 129, 0.16);
+      border-color: rgba(16, 185, 129, 0.5);
+      color: #6EE7B7;
+    }
+
+    .form-feedback.warning {
+      display: block;
+      background: rgba(245, 158, 11, 0.16);
+      border-color: rgba(245, 158, 11, 0.5);
+      color: #FCD34D;
     }
   </style>
 </head>
@@ -1320,7 +1447,7 @@
         <span class="brand-icon">
           <i data-lucide="aperture"></i>
         </span>
-        <span>SE7E<span class="text-gradient">FPV</span></span>
+        <span>SE7E<span class="text-gradient">.ENT</span></span>
       </a>
 
       <nav aria-label="Navegação Principal">
@@ -1360,6 +1487,7 @@
           muted
           loop
           playsinline
+          preload="metadata"
           poster="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1920&q=80"
         >
           <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-at-night-11-large.mp4" type="video/mp4" />
@@ -1372,15 +1500,15 @@
       <div class="container hero-content">
         <div class="hero-pill" data-aos="fade-down" data-aos-duration="800">
           <span class="live-dot"></span>
-          <span>Cinematografia Aérea & Drone FPV Cinema</span>
+          <span>Estúdio Integrado • Visual, Web & Performance</span>
         </div>
 
         <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
-          Perspectivas Que <span class="text-gradient">Elevam Sua Marca</span>
+          Presença Digital & Impacto Visual Que <span class="text-gradient">Elevam Sua Autoridade</span>
         </h1>
 
         <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
-          Tomadas aéreas ultra-dinâmicas com Drone FPV, filmes institucionais imersivos e captação em 4K/60fps D-Log para transformar a percepção de valor do seu negócio.
+          Soluções completas de presença digital, tráfego pago e captação visual de alto impacto para elevar a autoridade do seu negócio.
         </p>
 
         <div class="hero-actions" data-aos="fade-up" data-aos-delay="300">
@@ -1388,24 +1516,24 @@
             <i data-lucide="sparkles"></i>
             <span>Solicitar Orçamento</span>
           </a>
-          <a href="#showcase" class="btn btn-secondary">
-            <i data-lucide="play-circle"></i>
-            <span>Ver Demonstrações</span>
+          <a href="#servicos" class="btn btn-secondary">
+            <i data-lucide="layers"></i>
+            <span>Conhecer Soluções</span>
           </a>
         </div>
 
         <div class="hero-hud" data-aos="fade-up" data-aos-delay="400">
           <div class="hud-item">
-            <span class="hud-value">4K / 60fps</span>
-            <span class="hud-label">10-Bit Color D-Log M</span>
+            <span class="hud-value">4K / Drone</span>
+            <span class="hud-label">Imagens Aéreas Exclusivas</span>
           </div>
           <div class="hud-item">
-            <span class="hud-value">140 km/h</span>
-            <span class="hud-label">Velocidade FPV Cinema</span>
+            <span class="hud-value">Web & SEO</span>
+            <span class="hud-label">Páginas de Alta Conversão</span>
           </div>
           <div class="hud-item">
-            <span class="hud-value">100% Legal</span>
-            <span class="hud-label">ANAC • DECEA • ANATEL</span>
+            <span class="hud-value">ROI & Escala</span>
+            <span class="hud-label">Meta Ads • Google Ads</span>
           </div>
         </div>
       </div>
@@ -1419,110 +1547,117 @@
         <div class="section-header" data-aos="fade-up">
           <span class="section-badge">
             <i data-lucide="layers" style="width:15px;height:15px;"></i>
-            Soluções Audiovisuais
+            Nossos Pilares de Atuação
           </span>
-          <h2 class="section-title">Engenharia Visual Para <span class="text-gradient">Alto Impacto</span></h2>
+          <h2 class="section-title">Soluções Integradas Para <span class="text-gradient">Destacar e Escalar</span></h2>
           <p class="section-subtitle">
-            Combinamos pilotagem de precisão milimétrica, sensores de cinema e narrativa criativa para vídeos impossíveis de serem ignorados.
+            Unimos captação visual de alto impacto, engenharia web de alta conversão e tráfego pago estratégico para posicionar sua marca no topo.
           </p>
         </div>
 
         <div class="services-grid">
-          <!-- Card 1: Drone FPV Dinâmico -->
+          <!-- Card 1: Imagens Aéreas -->
           <article class="glass-card service-card" data-aos="fade-up" data-aos-delay="100">
             <div>
               <div class="service-media">
                 <!-- ==========================================================
-                     SUBSTITUIR POR VÍDEO DO CLIENTE: CARD 01 - DRONE FPV DINÂMICO
+                     IMAGEM CARD 01 - IMAGENS AÉREAS
+                     Para usar arquivo local da pasta img/, troque o src por: "img/nome-da-foto.jpg"
                      ========================================================== -->
-                <video
-                  autoplay
-                  muted
-                  loop
-                  playsinline
-                  poster="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=800&q=80"
-                >
-                  <source src="https://assets.mixkit.co/videos/preview/mixkit-fast-aerial-view-of-a-mountain-range-41492-large.mp4" type="video/mp4" />
-                </video>
-                <span class="service-tag">FPV Cinema</span>
+                <img
+                  src="https://lh3.googleusercontent.com/d/19YgHoS1lMdMoDD23jbE0-_esRhQloWUa"
+                  alt="Captação de Imagens Aéreas com Drone em 4K"
+                  loading="lazy"
+                />
+                <span class="service-tag">4K Foto & Vídeo</span>
               </div>
 
               <div class="service-icon-box">
-                <i data-lucide="zap"></i>
+                <i data-lucide="camera"></i>
               </div>
-              <h3 class="service-title">Drone FPV Dinâmico</h3>
+              <h3 class="service-title">Imagens Aéreas</h3>
               <p class="service-desc">
-                Imersão total em primeira pessoa. Perseguições em alta velocidade, mergulhos em fachadas e planos-sequência contínuos (One-Take) cruzando ambientes internos e externos.
+                Captação com drones em alta resolução (4K/foto e vídeo), cobertura institucional, imobiliária, inspeções e eventos.
               </p>
+              <div class="service-callout">
+                Destaque visual e ângulos exclusivos para valorizar empreendimentos e marcas.
+              </div>
             </div>
 
             <ul class="service-features">
-              <li><i data-lucide="check-circle-2"></i> Cinewhoops seguros para voos indoor com pessoas</li>
-              <li><i data-lucide="check-circle-2"></i> Estabilização Gyroflow em 4K ultra fluido</li>
-              <li><i data-lucide="check-circle-2"></i> Ideal para eventos, esportes, indústrias e resorts</li>
+              <li><i data-lucide="check-circle-2"></i> Captação aérea em 4K HDR (Foto e Vídeo)</li>
+              <li><i data-lucide="check-circle-2"></i> Cobertura imobiliária, institucional e eventos</li>
+              <li><i data-lucide="check-circle-2"></i> Inspeções técnicas e acompanhamento de obras</li>
             </ul>
           </article>
 
-          <!-- Card 2: Cinematografia Comercial -->
+          <!-- Card 2: Desenvolvimento Web -->
           <article class="glass-card service-card" data-aos="fade-up" data-aos-delay="200">
             <div>
               <div class="service-media">
                 <!-- ==========================================================
-                     SUBSTITUIR POR VÍDEO DO CLIENTE: CARD 02 - CINEMATOGRAFIA COMERCIAL
+                     IMAGEM CARD 02 - DESENVOLVIMENTO WEB
+                     Para usar arquivo local da pasta img/, troque o src por: "img/nome-da-foto.jpg"
                      ========================================================== -->
-                <video
-                  autoplay
-                  muted
-                  loop
-                  playsinline
-                  poster="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=800&q=80"
-                >
-                  <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-buildings-on-a-sunny-day-41463-large.mp4" type="video/mp4" />
-                </video>
-                <span class="service-tag">Estabilizado 4K</span>
+                <img
+                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
+                  alt="Desenvolvimento Web de Landing Pages e Sites de Alta Conversão"
+                  loading="lazy"
+                />
+                <span class="service-tag">Alta Conversão</span>
               </div>
 
               <div class="service-icon-box">
-                <i data-lucide="video"></i>
+                <i data-lucide="code-2"></i>
               </div>
-              <h3 class="service-title">Cinematografia Comercial</h3>
+              <h3 class="service-title">Desenvolvimento Web</h3>
               <p class="service-desc">
-                Planos suaves, órbitas perfeitas e revelações grandiosas em 4K/60fps para lançamentos imobiliários de alto padrão, filmes institucionais e campanhas publicitárias.
+                Criação de landing pages de alta conversão, sites institucionais responsivos, páginas ultra-rápidas e otimizadas para SEO e dispositivos móveis.
               </p>
+              <div class="service-callout">
+                Estrutura digital robusta pronta para transformar visitantes em clientes.
+              </div>
             </div>
 
             <ul class="service-features">
-              <li><i data-lucide="check-circle-2"></i> Lentes teleobjetivas e grande-angulares luminosas</li>
-              <li><i data-lucide="check-circle-2"></i> Fotografia aérea HDR em RAW de alta resolução</li>
-              <li><i data-lucide="check-circle-2"></i> Mapeamento visual de terrenos e empreendimentos</li>
+              <li><i data-lucide="check-circle-2"></i> Landing Pages focadas em conversão e leads</li>
+              <li><i data-lucide="check-circle-2"></i> Design 100% responsivo (Mobile-First) e veloz</li>
+              <li><i data-lucide="check-circle-2"></i> Otimização técnica para SEO e Google</li>
             </ul>
           </article>
 
-          <!-- Card 3: Pós-produção Completa -->
+          <!-- Card 3: Anúncios Online (Tráfego Pago) -->
           <article class="glass-card service-card" data-aos="fade-up" data-aos-delay="300">
             <div>
               <div class="service-media">
+                <!-- ==========================================================
+                     IMAGEM CARD 03 - ANÚNCIOS ONLINE (TRÁFEGO PAGO)
+                     Para usar arquivo local da pasta img/, troque o src por: "img/nome-da-foto.jpg"
+                     ========================================================== -->
                 <img
-                  src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80"
-                  alt="Estúdio de Color Grading e Pós-Produção Audiovisual"
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
+                  alt="Gestão de Tráfego Pago no Meta Ads e Google Ads"
                   loading="lazy"
                 />
-                <span class="service-tag">Finishing Suite</span>
+                <span class="service-tag">Meta & Google Ads</span>
               </div>
 
               <div class="service-icon-box">
-                <i data-lucide="sliders"></i>
+                <i data-lucide="trending-up"></i>
               </div>
-              <h3 class="service-title">Pós-produção Completa</h3>
+              <h3 class="service-title">Anúncios Online (Tráfego Pago)</h3>
               <p class="service-desc">
-                Transformamos o material bruto em cinema. Color grading profissional em DaVinci Resolve, Sound Design tridimensional (SFX), speed ramping e cortes rítmicos.
+                Gestão estratégica de campanhas no Meta Ads (Instagram/Facebook) e Google Ads.
               </p>
+              <div class="service-callout">
+                Atração de leads qualificados, escala de vendas e foco no retorno sobre investimento (ROI).
+              </div>
             </div>
 
             <ul class="service-features">
-              <li><i data-lucide="check-circle-2"></i> Masterização vertical nativa para Reels, Shorts & TikTok</li>
-              <li><i data-lucide="check-circle-2"></i> Desenho de som imersivo (motores, vento, ambiência)</li>
-              <li><i data-lucide="check-circle-2"></i> Motion Graphics e inserção de textos 3D no espaço</li>
+              <li><i data-lucide="check-circle-2"></i> Campanhas estratégicas em Meta Ads & Google Ads</li>
+              <li><i data-lucide="check-circle-2"></i> Segmentação precisa para atrair leads qualificados</li>
+              <li><i data-lucide="check-circle-2"></i> Otimização contínua focada em escala e ROI</li>
             </ul>
           </article>
         </div>
@@ -1559,6 +1694,7 @@
               muted
               loop
               playsinline
+              preload="none"
               poster="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
             >
               <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-luxurious-hotel-near-the-sea-41465-large.mp4" type="video/mp4" />
@@ -1604,6 +1740,7 @@
               muted
               loop
               playsinline
+              preload="none"
               poster="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80"
             >
               <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-at-night-11-large.mp4" type="video/mp4" />
@@ -1970,11 +2107,11 @@
           <div data-aos="fade-right">
             <span class="section-badge">
               <i data-lucide="send" style="width:15px;height:15px;"></i>
-              Vamos Voar Juntos
+              Vamos Crescer Juntos
             </span>
-            <h2 class="section-title">Pronto Para Elevar o <span class="text-gradient">Nível da Sua Produção?</span></h2>
+            <h2 class="section-title">Pronto Para Elevar a <span class="text-gradient">Autoridade do Seu Negócio?</span></h2>
             <p class="section-subtitle" style="margin-bottom: 1.5rem;">
-              Preencha os detalhes do seu projeto e receba uma proposta personalizada em poucos minutos diretamente no seu WhatsApp ou e-mail.
+              Selecione as soluções desejadas, preencha os detalhes do seu projeto e receba uma proposta estratégica diretamente no seu WhatsApp.
             </p>
 
             <div class="contact-info-list">
@@ -1982,7 +2119,7 @@
                 <div class="icon"><i data-lucide="phone-call"></i></div>
                 <div>
                   <h4 style="font-size:0.95rem;">Atendimento Direto / WhatsApp</h4>
-                  <p style="color:var(--text-secondary);font-size:0.9rem;">+55 (11) 99999-7777 • Resposta imediata</p>
+                  <p style="color:var(--text-secondary);font-size:0.9rem;">+55 (91) 98622-9138 • Resposta imediata</p>
                 </div>
               </div>
 
@@ -2026,40 +2163,56 @@
                     id="whatsapp"
                     name="whatsapp"
                     class="form-control"
-                    placeholder="(11) 99999-9999"
+                    placeholder="(91) 98622-9138"
+                    maxlength="15"
+                    inputmode="numeric"
+                    autocomplete="tel"
                     required
                   />
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="tipoCaptacao">Tipo de Captação Desejada *</label>
-                <select id="tipoCaptacao" name="tipoCaptacao" class="form-control" required>
-                  <option value="" disabled selected>Selecione a modalidade principal...</option>
-                  <option value="Tour One-Take com Drone FPV (Indoor/Outdoor)">Tour One-Take com Drone FPV (Indoor/Outdoor)</option>
-                  <option value="Cinematografia Aérea 4K (Imobiliário / Institucional)">Cinematografia Aérea 4K (Imobiliário / Institucional)</option>
-                  <option value="Cobertura de Evento / Esportes com FPV + Estabilizado">Cobertura de Evento / Esportes com FPV + Estabilizado</option>
-                  <option value="Pacote Completo (Captação + Edição + Reels)">Pacote Completo (Captação + Edição + Reels)</option>
-                  <option value="Diária Bruta para Produtoras / Agências">Diária Bruta para Produtoras / Agências</option>
-                </select>
+                <span class="form-label">Em qual(is) serviço(s) você tem interesse? *</span>
+                <div class="services-checkbox-grid" role="group" aria-label="Serviços de interesse">
+                  <label class="checkbox-card">
+                    <input type="checkbox" name="servicosInteresse" value="Imagens Aéreas" />
+                    <span>Imagens Aéreas</span>
+                  </label>
+
+                  <label class="checkbox-card">
+                    <input type="checkbox" name="servicosInteresse" value="Desenvolvimento Web" />
+                    <span>Desenvolvimento Web</span>
+                  </label>
+
+                  <label class="checkbox-card">
+                    <input type="checkbox" name="servicosInteresse" value="Anúncios Online" />
+                    <span>Anúncios Online</span>
+                  </label>
+
+                  <label class="checkbox-card">
+                    <input type="checkbox" name="servicosInteresse" value="Pacote Completo / Todos" id="checkPacoteCompleto" />
+                    <span>Pacote Completo / Todos</span>
+                  </label>
+                </div>
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="mensagem">Detalhes do Projeto & Local da Filmagem</label>
+                <label class="form-label" for="mensagem">Detalhes do Projeto & Objetivos</label>
                 <textarea
                   id="mensagem"
                   name="mensagem"
                   class="form-control"
-                  placeholder="Conte-nos brevemente sobre o local, data prevista e objetivo do vídeo..."
+                  placeholder="Conte-nos brevemente sobre sua empresa, objetivos e prazos desejados..."
                 ></textarea>
               </div>
 
-              <button type="submit" class="btn btn-primary" style="width: 100%;">
+              <button type="submit" id="submitBtn" class="btn btn-primary" style="width: 100%;">
                 <i data-lucide="send"></i>
                 <span>Solicitar Proposta no WhatsApp</span>
               </button>
 
-              <div class="form-feedback" id="formFeedback">
+              <div class="form-feedback" id="formFeedback" role="status" aria-live="polite">
                 Redirecionando para o WhatsApp com os dados do seu orçamento...
               </div>
             </form>
@@ -2079,10 +2232,10 @@
           <span class="brand-icon">
             <i data-lucide="aperture"></i>
           </span>
-          <span>SE7E<span class="text-gradient">FPV</span></span>
+          <span>SE7E<span class="text-gradient">.ENT</span></span>
         </a>
         <p style="color: var(--text-muted); font-size: 0.85rem;">
-          © 2026 SE7E AirCinema & FPV Productions. Todos os direitos reservados.
+          © 2026 SE7E.ENT • Soluções Visuais, Web & Performance. Todos os direitos reservados.
         </p>
       </div>
 
@@ -2104,7 +2257,7 @@
        BOTÃO FLUTUANTE WHATSAPP
        ======================================================================== -->
   <a
-    href="https://wa.me/5511999997777?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento%20para%20capta%C3%A7%C3%A3o%20com%20Drone%20%2F%20FPV."
+    href="https://wa.me/5591986229138?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento%20para%20o%20meu%20projeto."
     target="_blank"
     rel="noopener noreferrer"
     class="whatsapp-float"
@@ -2244,34 +2397,137 @@
         });
       });
 
-      // 8. Envio do Formulário Direto para WhatsApp
+      // 8. Máscara Dinâmica de WhatsApp: (XX) XXXXX-XXXX
+      const whatsappInput = document.getElementById('whatsapp');
+      if (whatsappInput) {
+        whatsappInput.addEventListener('input', (e) => {
+          let digits = e.target.value.replace(/\D/g, '').slice(0, 11);
+          let formatted = '';
+
+          if (digits.length > 0) {
+            formatted = '(' + digits.slice(0, 2);
+          }
+          if (digits.length >= 3) {
+            formatted += ') ' + digits.slice(2, 7);
+          }
+          if (digits.length >= 8) {
+            formatted += '-' + digits.slice(7, 11);
+          }
+
+          e.target.value = formatted;
+        });
+      }
+
+      // 9. Captação de Leads Integrada à Google Cloud Function + Redirecionamento WhatsApp (com Fallback)
       const leadForm = document.getElementById('leadForm');
+      const submitBtn = document.getElementById('submitBtn');
       const formFeedback = document.getElementById('formFeedback');
 
+      // =========================================================================
+      // CONFIGURAÇÃO DE PRODUÇÃO: INSIRA ABAIXO A URL DA SUA GOOGLE CLOUD FUNCTION
+      // Exemplo Gen 2: 'https://capturarlead-xxxxxx-rj.a.run.app'
+      // ou: 'https://southamerica-east1-SEU_PROJETO.cloudfunctions.net/capturarLead'
+      // =========================================================================
+      const CLOUD_FUNCTION_URL = 'https://southamerica-east1-SEU_PROJETO_ID.cloudfunctions.net/capturarLead';
+      const WHATSAPP_DESTINO = '5591986229138';
+
       if (leadForm) {
-        leadForm.addEventListener('submit', (e) => {
+        let isSubmitting = false;
+
+        leadForm.addEventListener('submit', async (e) => {
           e.preventDefault();
+
+          // Bloqueia múltiplos cliques durante o envio
+          if (isSubmitting) return;
+
           const nome = document.getElementById('nome').value.trim();
           const whatsapp = document.getElementById('whatsapp').value.trim();
-          const tipo = document.getElementById('tipoCaptacao').value;
+          const selecionados = Array.from(
+            document.querySelectorAll('input[name="servicosInteresse"]:checked')
+          ).map(cb => cb.value);
+
+          if (selecionados.length === 0) {
+            formFeedback.className = 'form-feedback warning';
+            formFeedback.style.display = 'block';
+            formFeedback.textContent = 'Por favor, selecione pelo menos um serviço de interesse.';
+            return;
+          }
+
+          const servicosTexto = selecionados.join(', ');
           const mensagem = document.getElementById('mensagem').value.trim();
 
-          formFeedback.style.display = 'block';
-
+          // Monta a URL do WhatsApp que será aberta após o registro (ou via fallback)
           const textoWhatsApp = [
-            `Olá! Gostaria de solicitar um orçamento de captação aérea:`,
+            `Olá! Gostaria de solicitar um orçamento:`,
             `• *Nome/Empresa:* ${nome}`,
             `• *WhatsApp:* ${whatsapp}`,
-            `• *Modalidade:* ${tipo}`,
+            `• *Serviço(s) de Interesse:* ${servicosTexto}`,
             mensagem ? `• *Detalhes:* ${mensagem}` : ''
           ].filter(Boolean).join('\n');
 
-          const numeroDestino = '5511999997777'; // Substituir pelo número oficial do cliente
-          const url = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(textoWhatsApp)}`;
+          const whatsappUrl = `https://wa.me/${WHATSAPP_DESTINO}?text=${encodeURIComponent(textoWhatsApp)}`;
 
-          setTimeout(() => {
-            window.open(url, '_blank', 'noopener,noreferrer');
-          }, 500);
+          // Ativa estado visual de Loading e bloqueia o botão
+          isSubmitting = true;
+          const originalBtnHTML = submitBtn.innerHTML;
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = `<span class="spinner-icon" aria-hidden="true"></span><span>Enviando dados...</span>`;
+
+          formFeedback.className = 'form-feedback';
+          formFeedback.style.display = 'block';
+          formFeedback.textContent = 'Registrando sua solicitação com segurança...';
+
+          // Timeout de 6 segundos para nunca travar a experiência do lead
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 6000);
+
+          try {
+            const response = await fetch(CLOUD_FUNCTION_URL, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({
+                nome,
+                whatsapp,
+                servicos: selecionados,
+                servico: servicosTexto,
+                mensagem,
+                origem: window.location.href
+              }),
+              signal: controller.signal
+            });
+
+            clearTimeout(timeoutId);
+
+            if (!response.ok) {
+              throw new Error(`HTTP status ${response.status}`);
+            }
+
+            const result = await response.json();
+
+            if (result && result.success) {
+              formFeedback.className = 'form-feedback success';
+              formFeedback.textContent = 'Solicitação registrada com sucesso! Redirecionando para o WhatsApp...';
+            } else {
+              throw new Error('Resposta inesperada da Cloud Function');
+            }
+          } catch (error) {
+            clearTimeout(timeoutId);
+            // Fallback silencioso: garante que o lead nunca seja perdido caso a Cloud Function falhe ou dê timeout
+            console.warn('[Fallback Lead] Redirecionando diretamente para o WhatsApp:', error.message);
+            formFeedback.className = 'form-feedback success';
+            formFeedback.textContent = 'Redirecionando diretamente para o nosso atendimento no WhatsApp...';
+          } finally {
+            setTimeout(() => {
+              window.location.href = whatsappUrl;
+              isSubmitting = false;
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = originalBtnHTML;
+              if (window.lucide) window.lucide.createIcons();
+            }, 600);
+          }
         });
       }
     });
